@@ -1,0 +1,11 @@
+domain: admitriev.eu
+layout: go.kubebuilder.io/v2
+projectName: dns-endpoint-operator
+repo: github.com/dmitrievav/dns-endpoint-operator
+resources:
+- group: k8s
+  kind: DnsEndpoint
+  version: v1
+version: 3-alpha
+plugins:
+  go.sdk.operatorframework.io/v2-alpha: {}
