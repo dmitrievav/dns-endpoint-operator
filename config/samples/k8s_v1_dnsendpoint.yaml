@@ -1,7 +1,58 @@
 apiVersion: k8s.admitriev.eu/v1
 kind: DnsEndpoint
 metadata:
-  name: dnsendpoint-sample
+  name: kafka-jmx-external
+  labels:
+    app: kafka-jmx-external
 spec:
   # Add fields here
-  foo: bar
+  dns: example.com
+  port: 11001
+  name: metrics
+# ---
+# apiVersion: monitoring.coreos.com/v1
+# kind: ServiceMonitor
+# metadata:
+#   labels:
+#     app: kafka-jmx-external
+#   name: kafka-jmx-external
+# spec:
+#   endpoints:
+#     - interval: 30s
+#       port: metrics
+#   namespaceSelector:
+#     matchNames:
+#       - devenv-admitriev
+#   selector:
+#     matchLabels:
+#       app: kafka-jmx-external
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: kafka-jmx-external
+#   labels:
+#     app: kafka-jmx-external
+# spec:
+#   type: ExternalName
+#   externalName: example.com
+#   ports:
+#     - port: 11001
+#       targetPort: 11001
+#       protocol: "TCP"
+#       name: metrics
+# ---
+# kind: Endpoints
+# apiVersion: v1
+# metadata:
+#  name: kafka-jmx-external
+#  labels:
+#    app: kafka-jmx-external
+# subsets:
+#  - addresses:
+#      - ip: 10.10.10.1
+#      - ip: 10.10.10.2
+#      - ip: 10.10.10.3
+#    ports:
+#      - port: 11001
+#        name: metrics

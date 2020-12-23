@@ -28,7 +28,9 @@ type DnsEndpointSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	Dns string `json:"dns,omitempty"`
+	Dns  string `json:"dns,omitempty"`
+	Port int32  `json:"port,omitempty"`
+	Name string `json:"name,omitempty"`
 }
 
 // DnsEndpointStatus defines the observed state of DnsEndpoint
