@@ -2,7 +2,7 @@
 
 ## Overview
 
-`dns-endpoint-operator` is a service that helps you automatically create and update endpointss, assosiated with external kubernetes services, by periodically resolving a given DNS name to a list of IPs.
+`dns-endpoint-operator` is a service that helps you automatically create and update endpoints, assosiated with external kubernetes services, by periodically resolving a given DNS name to a list of IPs.
 
 It is build using operator SDK `operator-sdk`
 and introduces a new CRD: `kind: DnsEndpoint`
