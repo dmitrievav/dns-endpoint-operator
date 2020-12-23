@@ -117,10 +117,10 @@ func (r *DnsEndpointReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error)
 		if errors.IsNotFound(err) {
 			// Define new endpoints
 			endpoints = r.endpointsForDnsEndpoint(dnsendpoint, addresses)
-			log.Info("Creating new Epoints", "Endpoints.Namespace", endpoints.Namespace, "Endpoints.Name", endpoints.Name)
+			log.Info("Creating new Endpoints", "Endpoints.Namespace", endpoints.Namespace, "Endpoints.Name", endpoints.Name)
 			err = r.Create(ctx, endpoints)
 			if err != nil {
-				log.Error(err, "Failed to create new Epoints", "Endpoints.Namespace", endpoints.Namespace, "Endpoints.Name", endpoints.Name)
+				log.Error(err, "Failed to create new Endpoints", "Endpoints.Namespace", endpoints.Namespace, "Endpoints.Name", endpoints.Name)
 				return ctrl.Result{}, err
 			}
 			dnsendpoint.Status.Ips = ips
@@ -130,10 +130,10 @@ func (r *DnsEndpointReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error)
 				log.Error(err, "Failed to update DnsEpoint status")
 				return ctrl.Result{}, err
 			}
-			// Epoints created successfully - return and requeue after sleepTime
+			// Endpoints created successfully - return and requeue after sleepTime
 			return ctrl.Result{RequeueAfter: sleepTime}, nil
 		}
-		log.Error(err, "Failed to get Epoints")
+		log.Error(err, "Failed to get Endpoints")
 		return ctrl.Result{}, err
 	}
 	log.Info("DNS cache", "Host", dnsendpoint.Spec.Dns, "IPs", dnsendpoint.Status.Ips)
@@ -141,7 +141,7 @@ func (r *DnsEndpointReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error)
 	// If IPs are changed, update endpoints and status
 	if !reflect.DeepEqual(dnsendpoint.Status.Ips, ips) {
 		endpoints.Subsets[0].Addresses = addresses
-		log.Info("Update Epoints", "endpoints.Namespace", endpoints.Namespace, "endpoints.Name", endpoints.Name)
+		log.Info("Update Endpoints", "Endpoints.Namespace", endpoints.Namespace, "Endpoints.Name", endpoints.Name)
 		err = r.Update(ctx, endpoints)
 		if err != nil {
 			log.Error(err, "Failed to update Endpoints", "Endpoints.Namespace", endpoints.Namespace, "Endpoints.Name", endpoints.Name)
@@ -155,7 +155,7 @@ func (r *DnsEndpointReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error)
 			return ctrl.Result{}, err
 		}
 	}
-	// Epoints updated - return and requeue after sleepTime
+	// Endpoints updated - return and requeue after sleepTime
 	return ctrl.Result{RequeueAfter: sleepTime}, nil
 }
 
