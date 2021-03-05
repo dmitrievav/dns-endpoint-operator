@@ -1,5 +1,7 @@
 # dns-endpoint-operator Kubernetes operator
 
+![dns-endpoint-operator logo](https://github.com/dmitrievav/dns-endpoint-operator/raw/master/deo.jpg "deo logo")
+
 ## Overview
 
 `dns-endpoint-operator` is a service that helps you automatically create and update endpoints, assosiated with external kubernetes services, by periodically resolving a given DNS name to a list of IPs.
